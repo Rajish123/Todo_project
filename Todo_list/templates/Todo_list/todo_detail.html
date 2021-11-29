@@ -1,0 +1,17 @@
+{% extends 'Todo_list/index.html' %}
+
+{% block content %}
+
+    <div class = "container">
+        {{todo.user}}
+        {{todo.title}}
+        {{todo.description}}
+        {{todo.priority}}
+        {{todo.notify}}
+        {{todo.created_at}}
+        {{todo.completed}}
+
+
+    </div>
+
+{% endblock content %}

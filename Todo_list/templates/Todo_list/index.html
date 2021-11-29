@@ -1,0 +1,81 @@
+{% load static %}
+</DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .img-container{
+                max-width: 100%;
+                display: block;
+                border: 0;
+                outline: 0;
+                background: black;
+                }
+            .img-container img{
+                height: 120px;
+                width: 600px;
+                padding: 10px 5px;
+            }
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: rgb(8, 0, 0);
+                }
+
+            li {
+            text-align: left;
+            }
+
+            li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            }
+
+            li a:hover:not(.active) {
+            background-color: red;
+            }
+
+            .active {
+            background-color: red;
+            }
+
+            {% comment %} .login{
+                float: right;
+            } {% endcomment %}
+        </style>
+        {% comment %} <link rel="stylesheet"  href="{% static 'blog/custom.css' %}"> {% endcomment %}
+        {% if messages %}
+            {% for message in messages %}
+                {{message}}
+            {% endfor%}
+        {% endif %}
+    </head>
+    <body>
+        {% comment %} <div class = "img-container">
+            <img src="{% static 'blog/images/base.jpg' %}">
+
+        </div> {% endcomment %}
+        <ul>
+            <li><a class = "active" href="">Home</a></li>
+            <li><a href="">Todo</a></li>
+            <li><a href="">History</a></li>
+            {% if user.is_authenticated %}
+                <li><a href = "">My Albums</a></li>
+                <li style = "float:right"><a href = "">Profile</a></li>
+                <li style = "float:right"><a href = "">Log out</a><li>
+            {% else %}
+                <li class = "login"><a href="">Login</a></li>
+                <li style="float:right"><a href="">Register</a></li>
+
+            {% endif %}
+
+        </ul>
+
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>
