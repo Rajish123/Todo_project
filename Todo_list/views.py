@@ -1,78 +1,121 @@
-from django.http.response import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
-from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from .filters import *
 
 # Create your views here.
 
 def SignUp(request):
-    signup_form = SignUpForm(request.POST or None)
-    if signup_form.is_valid():
-        email = signup_form.cleaned_data.get('email')
-        password = signup_form.cleaned_data.get('password1')
-        signup_form.save()
-        return redirect('/')
+    context = {}
+    if request.method == "POST":
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            form.save()
+            messages.success(request,f"{username} account successfully created")
+            return redirect('home')
     else:
-        signup_form = SignUpForm()
-    return render(request,'Todo_list/signup.html',{'form':signup_form})
-
-def Login(request):
-    if request.user.is_authenticated:
-        return HttpResponse(f"{request.user} is already logged in.")
-    login_form = LoginForm(request.POST or None)
-    if login_form.is_valid():
-        email = login_form.cleaned_data.get('email')
-        password = login_form.cleaned_data.get('password')
-        user = authenticate(request,email = email, password = password)
-        if user is not None:
-            login(request,user)
-            return HttpResponseRedirect('home')
-        else:
-            return HttpResponse("Invalid Input!.Please enter your information correctly")
-    else:
-        login_form = LoginForm()
-    return render(request,'Todo_list/login.html',{'form':login_form})
-
-def Logout(request):
-    if request.user.is_authenticated:
-        logout(request)
-    return HttpResponseRedirect('signup')
+        form = UserRegistrationForm(request.GET)
+    context['form'] = form
+    return render(request,'Todo_list/signup.html',context)
 
 def Index(request):
     return render(request,'Todo_list/index.html')
 
+@login_required
+def Profile(request):
+    context = {}
+    if request.method == "POST":
+        userform = UserUpdateForm(request.POST, instance=request.user)
+        profileform = ProfileUpdateForm(request.POST,request.FILES,instance = request.user.profile)
+        if userform and profileform.is_valid():
+            userform.save()
+            profileform.save()
+            messages.success(request,"Profile updated successfully")
+            return redirect('home')
+        else:
+            messages.error(request,"Not a valid form")
+            return redirect('home')
+    else:
+        userform = UserUpdateForm(instance = request.user)
+        profileform = ProfileUpdateForm(instance = request.user.profile)
+    context['userform'] = userform
+    context['profileform'] = profileform
+    return render(request,'Todo_list/profile.html',context)            
+
+@login_required
 def CreateTodo(request):
     context = {}
-    todo_form = TodoForm(request.POST or None)
-    if todo_form.is_valid():
-        todo = todo_form.save()
-        messages.success(request,"Successfully Created.")
-        return redirect('home')
-    context = {'form':todo_form}
+    if request.method == "POST":
+        todoform = TodoForm(request.POST,instance=request.user.profile)
+        if todoform.is_valid():
+            todoform.save()
+            messages.success(request,"Successfully Created.")
+            return redirect('home')
+        else:
+            messages.error(request,"Form you filled is not a valid one!!")
+            return redirect('create-todo')
+    else:
+        todoform = TodoForm()
+    context['form'] = todoform
     return render(request,'Todo_list/createtodo.html',context)
 
+@login_required
 def TodoDetail(request,slug):
     context = {}
     todo = get_object_or_404(Todo,slug = slug)
-    context = {'todo':todo}
+    context['todo'] = todo
     return render(request,'Todo_list/todo_detail.html',context)
 
+@login_required
 def UpdateTodo(request,slug):
     context = {}
-    todo = Todo.objects.filter(slug__iexact = slug)
-    update_form = TodoForm(request.POST or None)
-    if update_form.is_valid():
-        update_form.save()
-        messages.success(request,"Updated Successfully")
-        return HttpResponseRedirect('todo_detail/'+ slug)
-    context = {'form':update_form}
+    todo = Todo.objects.get(slug__iexact = slug)
+    if request.method == "POST":
+        update_form = TodoForm(request.POST, instance=todo)
+        if update_form.is_valid():
+            update_form.save()
+            messages.success(request,"Updated Successfully")
+            return redirect('todo-detail', slug = todo.slug)
+    else:
+        update_form = TodoForm()
+    context['form'] = update_form
     return render(request,'Todo_list/update_todo.html',context)
 
-    # after update: updated todo stores as another object in admin panel
-    # todo before updated is also there in admin panel
-    # error occured due to no instance is mentioned in TodoForm
-    # while fetching data, if there is more than one todo with same slug;creates error
+@login_required
+def ListTodo(request):
+    context = {}
+    profile = request.user.profile
+    todo_list = profile.todo_set.all()
+    # here data get rendered in todo_list which is thrown in myFilter and if we have any parameters it filters
+    # it down and then we remake the filterdata and assign to variable in todolist in line 96
+    myFilter = SearchFilter(request.GET, queryset = todo_list)
+    todo_list = myFilter.qs
+    context = {'todo_list': todo_list, 'myFilter': myFilter}
+    return render(request,"Todo_list/listtodo.html",context)
+
+@login_required
+def DeleteTodo(request,slug):
+    todo_to_delete = Todo.objects.get(slug__iexact = slug)
+    todo_to_delete.delete()
+    messages.success(request,f"{todo_to_delete.title} successfully deleted")
+    return redirect('todo-list')
+
+@login_required
+def TodoLog(request):
+    context = {}
+    profile = request.user.profile
+    all_todo = profile.todo_set.all()
+    todo_completed = profile.todo_set.filter(completed = "Accomplished")
+    inprogress_todo = profile.todo_set.filter(completed = "Unaccomplished")
+    all_todo_count = all_todo.count()
+    todo_completed_count = todo_completed.count()
+    inprogress_todo_count = inprogress_todo.count()
+    context = {'todo':all_todo_count, 'todo_completed':todo_completed_count, 'todo_inprogress':inprogress_todo_count}
+    return render(request,'Todo_list/todo_log.html',context)
+
+
 
 
 

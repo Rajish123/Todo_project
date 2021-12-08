@@ -6,19 +6,13 @@
     </head>
     <body>
         <h2>Login</h2>
-        <form method="post" action="">
+        <form class = "input-group" method = "POST" action = "" id = "loginform">
             {% csrf_token %}
-            <table>
-            <tr>
-                <td>{{ form.email.label_tag }}</td>
-                <td>{{ form.email }}</td>
-            </tr>
-            <tr>
-                <td>{{ form.password.label_tag }}</td>
-                <td>{{form.password}}</td>
-            </tr>
-            </table>
-            <input type="submit" value="login" />
-        </form>
+                <input type = "text" class = "input-field" name = "username" placeholder = "Enter Username">
+                <input type = "password" class = "input-field" name = "password" placeholder = "Password">
+                <input type = "checkbox" class = "check_box"><span>Remember me</span> 
+                <button class = "button" type = "submit"  form = "loginform" value = "Submit">Login</button>
+                <button class = "button"><a href = "#">Sign Up</a><button>
+        </form> 
     </body>
 </html>

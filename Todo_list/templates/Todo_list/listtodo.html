@@ -1,0 +1,22 @@
+{% extends 'Todo_list/index.html' %}
+
+{% block content %}
+
+<div class = "container">
+    <div class = "search_filter">
+        <form method = "GET">
+
+            {{myFilter.form}}
+        </form>
+
+    </div>
+    {% for todo in todo_list %}
+        <div class = "todo_list">
+            <div class = "todo_title">
+                <li>{{todo.title}}</li>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

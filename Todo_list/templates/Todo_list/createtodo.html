@@ -1,12 +1,56 @@
 {% extends 'Todo_list/index.html' %}
+{% comment %} 
 
-{% block content %}
     <h2>Create Todo</h2>
+    <h3>{{user.email}}</h2>
     <form method = "POST" enctype = "multipart/form-data">
         {% csrf_token %}
         {{form.as_p}}
-        <button type = "submit" value = "create_now">Create Now</button>
+        <input type="submit" value = 'Submit'>
     </form>
 
 
+ {% endcomment %}
+
+ <style>
+    .create_todo{
+        position: absolute;
+        top: 10px;
+        left: 50px;
+        transform: translate(50%, 50%);
+        width: 40%;
+        border-radius: 10px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
+
+    .button{
+        background-color: green;
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        font-size: 16px;
+        margin: 20px 10px;
+        cursor: pointer;
+    }
+    .button1{
+        border-radius: 12px;
+    }
+</style>
+
+ {% block content %}
+
+    <div class = "create_todo">
+        <form method = "POST" action = "" enctype = "multipart/form-data" id = "create_todo">
+            {% csrf_token %}
+                {{form.as_p}}
+                {% comment %} <label for = "title">Title</label>
+                <input type = "text" id = "title" name = "title" placeholder = "Enter song name...">
+                <label for = "audio">Song</label>
+                <input type = "file" id = "audio" name = "audio"> {% endcomment %}
+                <button class = "button button1" type = "submit" form ="create_todo" value = "Submit">Submit</button>
+        </form>
+    </div>
 {% endblock content %}
