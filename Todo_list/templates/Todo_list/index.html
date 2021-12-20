@@ -1,81 +1,53 @@
 {% load static %}
-</DOCTYPE html>
-<html>
-    <head>
-        <style>
-            .img-container{
-                max-width: 100%;
-                display: block;
-                border: 0;
-                outline: 0;
-                background: black;
-                }
-            .img-container img{
-                height: 120px;
-                width: 600px;
-                padding: 10px 5px;
-            }
-            ul {
-                list-style-type: none;
-                margin: 0;
-                padding: 0;
-                overflow: hidden;
-                background-color: rgb(8, 0, 0);
-                }
 
-            li {
-            text-align: left;
-            }
-
-            li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            }
-
-            li a:hover:not(.active) {
-            background-color: red;
-            }
-
-            .active {
-            background-color: red;
-            }
-
-            {% comment %} .login{
-                float: right;
-            } {% endcomment %}
-        </style>
-        {% comment %} <link rel="stylesheet"  href="{% static 'blog/custom.css' %}"> {% endcomment %}
-        {% if messages %}
-            {% for message in messages %}
-                {{message}}
-            {% endfor%}
-        {% endif %}
-    </head>
-    <body>
-        {% comment %} <div class = "img-container">
-            <img src="{% static 'blog/images/base.jpg' %}">
-
-        </div> {% endcomment %}
-        <ul>
-            <li><a class = "active" href="">Home</a></li>
-            <li><a href="">Todo</a></li>
-            <li><a href="">History</a></li>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% if messages %}
+        {% for message in messages %}
+            {{message}}
+        {% endfor%}
+    {% endif %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Home | Todo List</title>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav id="navbar">
+        <div class="flex-container">
             {% if user.is_authenticated %}
-                <li><a href = "">My Albums</a></li>
-                <li style = "float:right"><a href = "">Profile</a></li>
-                <li style = "float:right"><a href = "">Log out</a><li>
+                <div>
+                    <a href="{% url 'home' %}" class="current">Home</a>
+                    <a href="{% url 'create-todo' %}">Create Now</a>
+                    <a href="{% url 'todo-list' %}">All Todo</a>
+                    <a href="{% url 'todo-accomplished' %}">Accomplished</a>
+                    <a href="{% url 'todo-inprogress' %}">In Progress</a>
+                </div>
+                <div>
+                    <a href="{% url 'profile' %}">Profile</a>
+                    <a href="{% url 'logout' %}">Log Out</a>
+                </div>
             {% else %}
-                <li class = "login"><a href="">Login</a></li>
-                <li style="float:right"><a href="">Register</a></li>
-
+                <div>
+                    <a href="{% url 'home' %}" class="current">Home</a>
+                </div>
+                <div>
+                    <a href = "{% url 'signup' %}">Register</a>
+                    <a href="{% url 'login' %}">Login</a>
+                </div>
             {% endif %}
+        </div>
+    </nav>
 
-        </ul>
-
-        {% block content %}
-        {% endblock %}
-    </body>
+    <!-- Showcase -->
+    {% comment %} <div id="home-showcase">
+        <h1 class="l-heading"> Welcome, Organize Your tasks here and start doing it now.</h1>
+    </div>
+     {% endcomment %}
+    {% block content %}
+    {% endblock %}
+</body>
 </html>

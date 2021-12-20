@@ -1,0 +1,9 @@
+{% extends 'Todo_list/index.html' %}
+{% block content %}
+    {% if todo_inprogress %}
+        {{todo_inprogress}}  
+    {% else %}
+        <h2>All task has been completed.</h2>
+    {% endif %}  
+
+{% endblock %}

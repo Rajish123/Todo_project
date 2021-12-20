@@ -10,6 +10,7 @@ def unique_slug_generator(instance,new_slug = None):
         slug = new_slug
     else:
         slug = slugify(instance.title)
+    # here Klass is set to actual model class that the instance comes from.
     Klass = instance.__class__
     # max_length = Klass._meta.get_field('slug').max_length
     # slug = slug[:max_length]

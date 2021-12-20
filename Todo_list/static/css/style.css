@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.5rem;
+    background: rgb(236, 236, 236);
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+/* utiliy classes */
+.l-heading {
+    font-size: 50px;
+    line-height: 1.3;
+}
+
+.btn {
+    background: #333;
+    color: #fff;
+    padding: 0.5em;
+}
+
+.btn:hover {
+    color: rgb(236, 122, 28);
+}
+
+/* Navigation Bar */
+#navbar {
+    background: #333;
+    padding: 0.5rem 0;
+    position: sticky;
+}
+
+#navbar a {
+    color: #fff;
+    padding: 0 1.5rem;
+}
+
+#navbar a:hover,
+#navbar a.current {
+    color: rgb(236, 122, 28);
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Home Showcase */
+
+#home-showcase h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 94.9vh;
+    padding: 0 20px;
+    text-align: center;
+    color: #333;
+}
+
+/* Profile Showcase */
+.border-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-container {
+    border: 1px solid #000;
+    border-style: none;
+    background: #fff;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    margin: 50px 0;
+    width: fit-content;
+}
+
+.profile-container img {
+    border-radius: 50%;
+    height: 200px;
+    padding-bottom: 20px;
+}
+
+.profile-container p, a {
+    padding-bottom: 20px;
+}

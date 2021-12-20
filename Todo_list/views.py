@@ -1,3 +1,5 @@
+from django.http import request
+from django.http.response import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from django.contrib import messages
@@ -25,30 +27,32 @@ def Index(request):
 
 @login_required
 def Profile(request):
+    return render(request,'Todo_list/profile.html')   
+
+@login_required
+def UpdateProfile(request):
     context = {}
     if request.method == "POST":
-        userform = UserUpdateForm(request.POST, instance=request.user)
-        profileform = ProfileUpdateForm(request.POST,request.FILES,instance = request.user.profile)
+        userform = UserUpdateForm(request.POST, instance = request.user)
+        profileform = ProfileUpdateForm(request.POST,request.FILES, instance = request.user.profile)
         if userform and profileform.is_valid():
             userform.save()
             profileform.save()
-            messages.success(request,"Profile updated successfully")
-            return redirect('home')
+            messages.success(request,"Updated Successful")
         else:
-            messages.error(request,"Not a valid form")
-            return redirect('home')
+            raise ValidationError("Not valid!")
     else:
         userform = UserUpdateForm(instance = request.user)
-        profileform = ProfileUpdateForm(instance = request.user.profile)
-    context['userform'] = userform
-    context['profileform'] = profileform
-    return render(request,'Todo_list/profile.html',context)            
+        profileform = ProfileUpdateForm(request.POST, request.FILES,instance = request.user.profile)
+    context = {'userform':userform,'profileform':profileform}
+    return render(request,'Todo_list/settings.html',context)
+
 
 @login_required
 def CreateTodo(request):
     context = {}
     if request.method == "POST":
-        todoform = TodoForm(request.POST,instance=request.user.profile)
+        todoform = TodoForm(request.POST, instance = request.user.profile)
         if todoform.is_valid():
             todoform.save()
             messages.success(request,"Successfully Created.")
@@ -103,6 +107,22 @@ def DeleteTodo(request,slug):
     return redirect('todo-list')
 
 @login_required
+def AccomplishedTodo(request):
+    context = {}
+    profile = request.user.profile
+    todo_completed = profile.todo_set.filter(completed = "Accomplished")
+    context = {'todo_completed':todo_completed}
+    return  render(request,'Todo_list/accomplished_todo.html',context)
+
+@login_required
+def TodoInprogress(request):
+    context = {}
+    profile = request.user.profile
+    todo_inprogress = profile.todo_set.filter(completed = "Unaccomplished")
+    context['todo_inprogress'] = todo_inprogress
+    return render(request,'Todo_list/todo_inprogress.html',context)
+
+@login_required
 def TodoLog(request):
     context = {}
     profile = request.user.profile
@@ -116,6 +136,7 @@ def TodoLog(request):
     return render(request,'Todo_list/todo_log.html',context)
 
 
+# todo is not saved in database.
 
 
 

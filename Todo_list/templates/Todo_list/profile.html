@@ -4,17 +4,21 @@
 {% block content %}
 
     <div class = "profile_page">
-        <img class = "profile_pic" src = "{{user.profile.avatar.url}}" alt = "loading">
-        <h2>{{user.username}}</h2>
-        <h2>{{user.email}}</h2>
+        <section>
+            <div class="border-container">
+                <div class="profile-container">
+                    <div>
+                        <img src="{{user.profile.avatar.url}}" alt="user profile">
+                    </div>
+                    <div>
+                        <p>{{user.username}}</p>
+                        <p>{{user.email}}</p>
+                        <a href="{% url 'update_profile' %}" class="btn">Settings</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </div>
 
-    <div class = "update_pic">
-        <form method = "POST" action = "#" enctype = "multipart/form-data" id = "updateinfo">
-            {% csrf_token %}
-            {{userform.as_p}}
-            {{profileform.as_p}}
-            <button class = "button button1" type = "submit" form = "updateinfo" value = "Submit">Update</button>
-        </form>
-    </div>
 {% endblock %}

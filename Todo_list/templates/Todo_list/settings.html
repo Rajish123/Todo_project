@@ -1,0 +1,14 @@
+{% extends 'Todo_list/index.html' %}
+
+
+{% block content %}
+
+    <div class = "update_pic">
+        <form method = "POST" action = "#" enctype = "multipart/form-data" id = "updateinfo">
+            {% csrf_token %}
+            {{userform.as_p}}
+            {{profileform.as_p}}
+            <button class = "button button1" type = "submit" form = "updateinfo" value = "Submit">Update</button>
+        </form>
+    </div>
+{% endblock %}
