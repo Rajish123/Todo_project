@@ -96,3 +96,54 @@ a {
 .profile-container p, a {
     padding-bottom: 20px;
 }
+
+/* login showcase */
+#login-body {
+    background:rgb(192, 188, 188);
+}
+
+#login-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#login-wrap {
+    border: 1px solid #000;
+    border-style: none;
+    background: rgb(212, 208, 208, 0.5);
+    border-radius: 10px;
+    padding: 20px 20px;
+    margin: 50px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* login image */
+#login-wrap img {
+    height: 400px;
+    width: 500px;
+}
+
+/* login form */
+#login-form {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#login-form div {
+    padding: 10px 0;
+}
+
+#login-form input {
+    height: 40px;
+    width: 300px;
+    text-align: center;
+    background: rgb(150, 137, 137, 0.5);
+    border-style: none;
+    border-radius: 5px;
+}

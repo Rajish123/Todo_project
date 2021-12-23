@@ -1,6 +1,43 @@
+{% load static %}
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Login | Todo List</title>
+</head>
+<body id="login-body">
+    <div id="login-container">
+        <div id="login-wrap">
+            <div id="image" class="flex-items">
+                <img src="{% static 'images/login.jpg' %}" alt="">
+            </div>
+            <div id="login-form" class="flex-items">
+                <form method = "POST">
+                    {% csrf_token %}
+                        <div>
+                            <input type="text" name="username" placeholder="Username">
+                        </div>
+                        <div>
+                            <input type="password" name="password" placeholder="Password">
+                        </div>
+                        <div>
+                            <button class = "btn" type = "submit" value = "Submit">Login</button>
+                        </div>
+                        <div>
+                            <button class = "btn" type = "submit" value = "Submit"><a href = "{% url 'signup' %}">Signup</a><button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>  
+</body>
+</html>
 
-<html>
+{% comment %} <html>
     <head>
         <title>Login</title>
     </head>
@@ -15,4 +52,4 @@
                 <button class = "button"><a href = "#">Sign Up</a><button>
         </form> 
     </body>
-</html>
+</html> {% endcomment %}
