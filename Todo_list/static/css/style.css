@@ -147,3 +147,19 @@ a {
     border-style: none;
     border-radius: 5px;
 }
+
+/* All ToDo */
+#todo-container {
+    display: grid;
+    grid-template-columns: 3fr 3fr 3fr 3fr;
+    padding: 20px;
+}
+
+.todo-detail {
+    border: 1px solid #000;
+    padding: 10px;
+    background: #fff;
+    border-radius: 10px;
+    border-style: none;
+    margin: 10px;
+}
