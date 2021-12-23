@@ -1,11 +1,11 @@
 {% extends 'Todo_list/index.html' %}
 
 {% block content %}
-    <h2>Create Todo</h2>
+    <h2>Update Todo</h2>
     <form method = "POST" enctype = "multipart/form-data">
         {% csrf_token %}
         {{form.as_p}}
-        <button type = "submit" value = "create_now">Create Now</button>
+        <button type = "submit" value = "Update">Update</button>
     </form>
 
 
