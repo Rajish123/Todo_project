@@ -1,9 +1,39 @@
 {% extends 'Todo_list/index.html' %}
 {% block content %}
-    {% if todo_completed %}
-        {{todo_completed}}   
-    {% else %}
-        <h2>No task has been accomplished yet</h2>
-    {% endif %} 
+    <div class = "container">
+        <div class = "search_filter">
+            <form method = "GET">
+
+                {{myFilter.form}}
+            </form>
+        </div>
+
+
+        {% if todo_completed %}
+            {% for todo in todo_completed %}
+            
+                <section>
+                    <div id = "todo-container">
+                        <div class = "todo-detail">
+                            <h2>Title:</h2>
+                            <br><h3>{{todo.title}}</h3><br>
+                            <h2>Description:</h2>
+                            <br><h3>{{todo.description}}</h3><br>
+                            <h2>Created At:</h2>
+                            <br><h3>{{todo.created_at}}</h3><br>
+                            <h2>Updated At:</h2>
+                            <br><h3>{{todo.updated_at}}</h3><br>
+                            <h2>Status:</h2>
+                            <br><h3>{{todo.completed}}</h3><br>
+                            <button><a href = "{% url 'delete-todo' todo.slug %}">Delete</a></button>
+                            <button><a href = "{% url 'todo-detail' todo.slug %}">Detail</a></button>
+                        </div>
+                    </div>
+                </section>
+            {% endfor %}
+        {% else %}
+            <h2>No task has been accomplished yet</h2>
+        {% endif %} 
+    </div>
 
 {% endblock %}

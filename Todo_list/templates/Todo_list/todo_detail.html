@@ -2,16 +2,24 @@
 
 {% block content %}
 
-    <div class = "container">
-        {{todo.user}}
-        {{todo.title}}
-        {{todo.description}}
-        {{todo.priority}}
-        {{todo.notify}}
-        {{todo.created_at}}
-        {{todo.completed}}
-
-
-    </div>
+    <section>
+        <div id = "todo-container">
+            <div class = "todo-detail">
+                <h2>Title:</h2>
+                <br><h3>{{todo.title}}</h3><br>
+                <h2>Description:</h2>
+                <br><h3>{{todo.description}}</h3><br>
+                <h2>Notify:</h2>
+                <br><h3>{{todo.notify}}</h3><br>
+                <h2>Created At:</h2>
+                <br><h3>{{todo.created_at}}</h3><br>
+                <h2>Updated At:</h2>
+                <br><h3>{{todo.updated_at}}</h3><br>
+                <h2>Status:</h2>
+                <br><h3>{{todo.completed}}</h3><br>
+                <span>Created By: {{todo.profile.user}}<span>
+            </div>
+        </div>
+    </section>
 
 {% endblock content %}
