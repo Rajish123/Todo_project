@@ -111,7 +111,9 @@ def AccomplishedTodo(request):
     context = {}
     profile = request.user.profile
     todo_completed = profile.todo_set.filter(completed = "Accomplished")
-    context = {'todo_completed':todo_completed}
+    myFilter = SearchFilter(request.GET, queryset = todo_completed)
+    todo_completed = myFilter.qs
+    context = {'todo_completed':todo_completed, 'myFilter': myFilter}
     return  render(request,'Todo_list/accomplished_todo.html',context)
 
 @login_required
@@ -119,7 +121,9 @@ def TodoInprogress(request):
     context = {}
     profile = request.user.profile
     todo_inprogress = profile.todo_set.filter(completed = "Unaccomplished")
-    context['todo_inprogress'] = todo_inprogress
+    myFilter = SearchFilter(request.GET, queryset = todo_inprogress)
+    todo_inprogress = myFilter.qs
+    context = {'todo_inprogress':todo_inprogress, 'myFilter': myFilter}
     return render(request,'Todo_list/todo_inprogress.html',context)
 
 @login_required
