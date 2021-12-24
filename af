@@ -1,0 +1,53 @@
+[33mcommit a1813df9eeb47a2a019ab6220ad2eb561507005d[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Rajish Maharjan <maharjanrajish101@gmail.com>
+Date:   Fri Dec 24 20:32:06 2021 +0545
+
+    templates modified
+
+[33mcommit 1c2824e7322a556bb3d3c1a4c6e30579b0d07fe5[m
+Author: Rajish Maharjan <maharjanrajish101@gmail.com>
+Date:   Fri Dec 24 20:31:30 2021 +0545
+
+    myfilter added in accomplished and inprogress view
+
+[33mcommit 3d24c1bd7ac8866f52c1d81f4a7c61ac251e85ce[m
+Author: Rajish Maharjan <maharjanrajish101@gmail.com>
+Date:   Fri Dec 24 20:30:22 2021 +0545
+
+    Charfilter and Datefilter added
+
+[33mcommit 889a2eab4df73efd45b37276de2b025bbd57b197[m
+Author: Rajish Maharjan <maharjanrajish101@gmail.com>
+Date:   Thu Dec 23 20:48:44 2021 +0545
+
+    All todo page modified
+
+[33mcommit 85db995e7c2ecc864bab4e51a6482a51f234a413[m
+Author: Rajish Maharjan <maharjanrajish101@gmail.com>
+Date:   Thu Dec 23 20:47:52 2021 +0545
+
+    styling for all todo
+
+[33mcommit d2800d8d8bdaed19856d1948edf4bb48a33adeae[m
+Author: Rajish Maharjan <maharjanrajish101@gmail.com>
+Date:   Thu Dec 23 16:44:12 2021 +0545
+
+    login page modified
+
+[33mcommit 95fa99934b94eaba1f9e6c39a7767faa023120dc[m
+Author: Rajish Maharjan <maharjanrajish101@gmail.com>
+Date:   Mon Dec 20 17:01:53 2021 +0545
+
+    changes in frontend
+
+[33mcommit a3aae53090fa2ed4028c5efdc312f36e2740706a[m
+Author: Rajish Maharjan <maharjanrajish101@gmail.com>
+Date:   Wed Dec 8 22:39:06 2021 +0545
+
+    Todo Done
+
+[33mcommit d9884acb4005b92109ee0c58e92dfb2cee9d227f[m
+Author: Rajish Maharjan <maharjanrajish101@gmail.com>
+Date:   Mon Nov 29 10:54:15 2021 +0545
+
+    Todo-Project
