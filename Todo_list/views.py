@@ -51,8 +51,9 @@ def UpdateProfile(request):
 @login_required
 def CreateTodo(request):
     context = {}
+    
     if request.method == "POST":
-        todoform = TodoForm(request.POST, instance = request.user.profile)
+        todoform = TodoForm(request.POST)
         if todoform.is_valid():
             todoform.save()
             messages.success(request,"Successfully Created.")
@@ -62,7 +63,7 @@ def CreateTodo(request):
             return redirect('create-todo')
     else:
         todoform = TodoForm()
-    context['form'] = todoform
+    context = {'form': todoform}
     return render(request,'Todo_list/createtodo.html',context)
 
 @login_required
@@ -77,7 +78,7 @@ def UpdateTodo(request,slug):
     context = {}
     todo = Todo.objects.get(slug__iexact = slug)
     if request.method == "POST":
-        update_form = TodoForm(request.POST, instance=todo)
+        update_form = TodoForm(request.POST, initial=todo)
         if update_form.is_valid():
             update_form.save()
             messages.success(request,"Updated Successfully")
