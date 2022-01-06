@@ -33,17 +33,18 @@ def Profile(request):
 def UpdateProfile(request):
     context = {}
     if request.method == "POST":
-        userform = UserUpdateForm(request.POST, instance = request.user)
-        profileform = ProfileUpdateForm(request.POST,request.FILES, instance = request.user.profile)
+        userform = UserUpdateForm(request.POST)
+        profileform = ProfileUpdateForm(request.POST,request.FILES)
         if userform and profileform.is_valid():
             userform.save()
             profileform.save()
             messages.success(request,"Updated Successful")
+            return redirect('profile')
         else:
             raise ValidationError("Not valid!")
     else:
-        userform = UserUpdateForm(instance = request.user)
-        profileform = ProfileUpdateForm(request.POST, request.FILES,instance = request.user.profile)
+        userform = UserUpdateForm()
+        profileform = ProfileUpdateForm(request.POST, request.FILES)
     context = {'userform':userform,'profileform':profileform}
     return render(request,'Todo_list/settings.html',context)
 
@@ -53,7 +54,7 @@ def CreateTodo(request):
     context = {}
     
     if request.method == "POST":
-        todoform = TodoForm(request.POST)
+        todoform = TodoForm(request.POST, instance = request.user)
         if todoform.is_valid():
             todoform.save()
             messages.success(request,"Successfully Created.")
@@ -62,7 +63,7 @@ def CreateTodo(request):
             messages.error(request,"Form you filled is not a valid one!!")
             return redirect('create-todo')
     else:
-        todoform = TodoForm()
+        todoform = TodoForm(instance=request.user)
     context = {'form': todoform}
     return render(request,'Todo_list/createtodo.html',context)
 
@@ -78,7 +79,7 @@ def UpdateTodo(request,slug):
     context = {}
     todo = Todo.objects.get(slug__iexact = slug)
     if request.method == "POST":
-        update_form = TodoForm(request.POST, initial=todo)
+        update_form = TodoForm(request.POST, instance=todo)
         if update_form.is_valid():
             update_form.save()
             messages.success(request,"Updated Successfully")
@@ -141,11 +142,10 @@ def TodoLog(request):
     return render(request,'Todo_list/todo_log.html',context)
 
 
-# todo is not saved in database.
 
 
 
 
-
+# create todo error
 
 

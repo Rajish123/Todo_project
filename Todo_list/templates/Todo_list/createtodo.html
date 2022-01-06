@@ -12,7 +12,7 @@
 
  {% endcomment %}
 
- <style>
+<style>
     .create_todo{
         position: absolute;
         top: 10px;
@@ -40,17 +40,39 @@
     }
 </style>
 
- {% block content %}
 
+{% block content %}
+<div class = "create_container">
     <div class = "create_todo">
-        <form method = "POST" action = "" enctype = "multipart/form-data" id = "create_todo">
+        <h2>Create your todo</h2>
+        <br><br>
+        <form method = "POST" action = "" id = "createtodo" name = "createtodo">
             {% csrf_token %}
+            {% comment %} <label for = "title">Title: </label> {% endcomment %}
+            {% comment %} {{form.title}} {% endcomment %}
+            {% comment %} <input type = "text" name = "title" id = "title" placeholder = "Name your work"> {% endcomment %}
+            {% comment %} <br><br> {% endcomment %}
+            {% comment %} <label for "description">Description: </label> {% endcomment %}
+            {% comment %} {{form.description}} {% endcomment %}
+
+            {% comment %} <input type = "text" name = "description" id = "description" placeholder = "Broaden your horizons"> {% endcomment %}
+            {% comment %} <br><br> {% endcomment %}
+            {% comment %} <label for = "status">Status: </label> {% endcomment %}
+            {% comment %} {{form.completed}} {% endcomment %}
+            {% comment %} <select name = "status" id = "status">
+                <option value = "Unaccomplished">Unaccomplished</option>
+                <option value = "Accomplished">Accomplished</option> {% endcomment %}
+            {% comment %} </select> {% endcomment %}
+            {% comment %} <br><br> {% endcomment %}
+            {% comment %} {{form.notify}} {% endcomment %}
+            {% comment %} <input type = "radio" name = "notify" id = "notify"> {% endcomment %}
+            {% comment %} &nbsp; {% endcomment %}
+            {% comment %} <span id = "notify">Notification</span>
+            <br><br> {% endcomment %}
                 {{form.as_p}}
-                {% comment %} <label for = "title">Title</label>
-                <input type = "text" id = "title" name = "title" placeholder = "Enter song name...">
-                <label for = "audio">Song</label>
-                <input type = "file" id = "audio" name = "audio"> {% endcomment %}
-                <button class = "button button1" type = "submit" form ="create_todo" value = "Submit">Submit</button>
+
+            <input type = "submit" value = "Submit" name = "submit" id = "submit" form = "createtodo">
         </form>
     </div>
+</div>
 {% endblock content %}

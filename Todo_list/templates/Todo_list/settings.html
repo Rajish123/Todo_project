@@ -3,12 +3,23 @@
 
 {% block content %}
 
-    <div class = "update_pic">
-        <form method = "POST" action = "#" enctype = "multipart/form-data" id = "updateinfo">
+    <div class = "profiel_settings">
+        <br><br>
+        <h2>Profile Settings</h2>
+        <br><br>
+        <form method = "POST" action = "#" enctype = "multipart/form-data" id = "profile_settings">
             {% csrf_token %}
-            {{userform.as_p}}
-            {{profileform.as_p}}
-            <button class = "button button1" type = "submit" form = "updateinfo" value = "Submit">Update</button>
+            <label for = "username">Username: </label>
+            <input type = "text" name = "username" id = "username" placeholder = "New username">
+            <br><br>
+            <label for = "email">Email Address: </label>
+            <input type = "email" name = "email" id = "email" placeholder = "New EmailAddress">
+            <br><br>
+            <label for = "avatar">Change Avatar</label>
+            {{profileform.avatar}}
+            <button class = "button button1" type = "submit" form = "profile_settings" value = "Submit">Update</button>
         </form>
     </div>
 {% endblock %}
+
+

@@ -38,7 +38,7 @@ class Todo(models.Model):
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
     completed = models.CharField(max_length=30, choices=COMPLETED,default='Unaccomplished')
-    notify = models.BooleanField(default = False)
+    notify = models.BooleanField(default = True)
     slug = models.SlugField(max_length=250,null = True, blank=True)
 
     class Meta:
