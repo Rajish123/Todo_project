@@ -7,8 +7,8 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.5rem;
-    /* background: rgb(236, 236, 236); */
-    background-image: url('{% static '/images/background.jpg' %}');
+    background: rgb(236, 236, 236);
+    /* background-image: url("{% static '/images/background.jpg' %}"); */
 }
 
 a {
@@ -167,14 +167,40 @@ a {
 
 /* Create todo */
 .create_container{
+    display: flex;
+    justify-content: center;
+    background: url("{% static '/images/background.jpg' %}");
     width:400px;
     margin: 100px auto 0px auto;
 }
 
 .create_todo{
+    display: flex;
+    align-items: center;
+    padding: 20px;
     background-color: rgba(0,0,0,0.5);
+    border-radius: 6px;
 }
 .h2{
     text-align: center;
     padding: 20px;
+}
+
+/* Log history */
+.log-container {
+    display: grid;
+    grid-template-columns: 3fr 3fr 3fr;
+    padding: 20px 0;
+}
+
+.log {
+    padding: 20px 10px;
+    margin: 10px;
+    background: #fff;
+    border-radius: 6px;
+}
+
+/* Filters */
+.filter {
+    padding: 10px;
 }

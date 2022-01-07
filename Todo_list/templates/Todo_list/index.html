@@ -20,7 +20,7 @@
         <div class="flex-container">
             {% if user.is_authenticated %}
                 <div>
-                    <a href="{% url 'home' %}" class="current">Home</a>
+                    <a href="{% url 'home' %}" >Home</a>
                     <a href="{% url 'create-todo' %}">Create Now</a>
                     <a href="{% url 'todo-list' %}">All Todo</a>
                     <a href="{% url 'todo-accomplished' %}">Accomplished</a>

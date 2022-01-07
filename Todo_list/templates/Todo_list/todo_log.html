@@ -2,14 +2,19 @@
 
 {% block content %}
 
-    <div class = "container">
-        <h2>Todo Created</h2>
-        {{todo}}
-        <h2>Todo Accomplished</h2>
-        {{todo_completed}}
-        <h2>Todo In Progress</h2>
-        {{todo_inprogress}}
-
+    <div class = "log-container">
+        <div class="log">
+            <h2>Todo Created</h2>
+            {{todo}}
+        </div>
+        <div class="log">
+            <h2>Todo Accomplished</h2>
+            {{todo_completed}}
+        </div>
+        <div class="log">
+            <h2>Todo In Progress</h2>
+            {{todo_inprogress}}
+        </div>    
 
     </div>
 

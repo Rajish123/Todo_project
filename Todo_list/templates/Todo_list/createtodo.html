@@ -12,67 +12,32 @@
 
  {% endcomment %}
 
-<style>
-    .create_todo{
-        position: absolute;
-        top: 10px;
-        left: 50px;
-        transform: translate(50%, 50%);
-        width: 40%;
-        border-radius: 10px;
-        background-color: #f2f2f2;
-        padding: 20px;
-    }
-
-    .button{
-        background-color: green;
-        border: none;
-        color: white;
-        text-align: center;
-        text-decoration: none;
-        display: block;
-        font-size: 16px;
-        margin: 20px 10px;
-        cursor: pointer;
-    }
-    .button1{
-        border-radius: 12px;
-    }
-</style>
-
 
 {% block content %}
-<div class = "create_container">
-    <div class = "create_todo">
-        <h2>Create your todo</h2>
-        <br><br>
-        <form method = "POST" action = "" id = "createtodo" name = "createtodo">
-            {% csrf_token %}
-            {% comment %} <label for = "title">Title: </label> {% endcomment %}
-            {% comment %} {{form.title}} {% endcomment %}
-            {% comment %} <input type = "text" name = "title" id = "title" placeholder = "Name your work"> {% endcomment %}
-            {% comment %} <br><br> {% endcomment %}
-            {% comment %} <label for "description">Description: </label> {% endcomment %}
-            {% comment %} {{form.description}} {% endcomment %}
+    <div class = "create_container">
+        <div class = "create_todo">
+            <h2>Create your todo</h2>
+            <br><br>
+            <form method = "POST" action = "" id = "createtodo" name = "createtodo">
+                {% csrf_token %}
+                <label for = "title">Title: </label>
+                {{form.title}}
+                <br><br>
+                <label for "description">Description: </label>
+                {{form.description}}    
 
-            {% comment %} <input type = "text" name = "description" id = "description" placeholder = "Broaden your horizons"> {% endcomment %}
-            {% comment %} <br><br> {% endcomment %}
-            {% comment %} <label for = "status">Status: </label> {% endcomment %}
-            {% comment %} {{form.completed}} {% endcomment %}
-            {% comment %} <select name = "status" id = "status">
-                <option value = "Unaccomplished">Unaccomplished</option>
-                <option value = "Accomplished">Accomplished</option> {% endcomment %}
-            {% comment %} </select> {% endcomment %}
-            {% comment %} <br><br> {% endcomment %}
-            {% comment %} {{form.notify}} {% endcomment %}
-            {% comment %} <input type = "radio" name = "notify" id = "notify"> {% endcomment %}
-            {% comment %} &nbsp; {% endcomment %}
-            {% comment %} <span id = "notify">Notification</span>
-            <br><br> {% endcomment %}
-                {{form.as_p}}
+                <br><br>
+                <label for = "status">Status: </label>
+                {{form.completed}}
+                <br><br>
+                {{form.notify}}
+                &nbsp;
+                <span id = "notify">Notification</span>
+                <br><br>
+                    {% comment %} {{form.as_p}} {% endcomment %}
 
-            <input type = "submit" value = "Submit" name = "submit" id = "submit" form = "createtodo">
-        </form>
+                <input type = "submit" class="btn" value = "Submit" name = "submit" id = "submit" form = "createtodo">
+            </form>
+        </div>
     </div>
-</div>
 {% endblock content %}
