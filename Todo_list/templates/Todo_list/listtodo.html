@@ -14,25 +14,29 @@
             </form>
 
         </div>
-        {% for todo in todo_list %}
             <section>
+
                 <div id="todo-container">
-                    <div class="todo-detail">
-                        <h2>Title:</h2>
-                        <br><h3><a href = "{% url 'todo-detail' todo.slug %}">{{todo.title}}</a></h3><br>
-                        <h2>Description:</h2>
-                        <br><h3>{{todo.description}}</h3><br>
-                        <h2>Notify:</h2>
-                        <br><h3>{{todo.notify}}</h3><br>
-                        <h2>Created date:</h2>
-                        <br><h3>{{todo.created_at}}</h3><br>
-                        <button><a href = "{% url 'todo-update' todo.slug %}">Update</a></button>
-                        <button><a href = "{% url 'delete-todo' todo.slug %}">Delete</a></button>
-                        <button><a href = "{% url 'todo-detail' todo.slug %}">Detail</a></button> 
+                    {% for todo in todo_list %}
+
+                        <div class="todo-detail">
+                            <h2>Title:</h2>
+                            <br><h3><a href = "{% url 'todo-detail' todo.slug %}">{{todo.title}}</a></h3><br>
+                            <h2>Description:</h2>
+                            <br><h3>{{todo.description}}</h3><br>
+                            <h2>Notify:</h2>
+                            <br><h3>{{todo.notify}}</h3><br>
+                            <h2>Created date:</h2>
+                            <br><h3>{{todo.created_at}}</h3><br>
+                            <button><a href = "{% url 'todo-update' todo.slug %}">Update</a></button>
+                            <button><a href = "{% url 'delete-todo' todo.slug %}">Delete</a></button>
+                            <button><a href = "{% url 'todo-detail' todo.slug %}">Detail</a></button> 
+                        </div>
+                    {% endfor %}
+
                     </div>
-                </div>
+
             </section>
-        {% endfor %}
         
     </div>
 {% endblock %}

@@ -10,10 +10,12 @@
         <form method = "POST" action = "#" enctype = "multipart/form-data" id = "profile_settings">
             {% csrf_token %}
             <label for = "username">Username: </label>
-            <input type = "text" name = "username" id = "username" placeholder = "New username">
+            {{userform.username}}
+            {% comment %} <input type = "text" name = "username" id = "username" placeholder = "New username"> {% endcomment %}
             <br><br>
             <label for = "email">Email Address: </label>
-            <input type = "email" name = "email" id = "email" placeholder = "New EmailAddress">
+            {{userform.email}}
+            {% comment %} <input type = "email" name = "email" id = "email" placeholder = "New EmailAddress"> {% endcomment %}
             <br><br>
             <label for = "avatar">Change Avatar</label>
             {{profileform.avatar}}

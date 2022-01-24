@@ -8,10 +8,10 @@
             </form>
         </div>
         {% if todo_inprogress %}
-            {% for todo in todo_inprogress %}
-                
-                <section>
-                    <div id = "todo-container">
+            
+            <section>
+                <div id = "todo-container">
+                    {% for todo in todo_inprogress %}
                         <div class = "todo-detail">
                             <h2>Title:</h2>
                             <br><h3>{{todo.title}}</h3><br>
@@ -26,9 +26,9 @@
                             <button><a href = "{% url 'delete-todo' todo.slug %}">Delete</a></button>
                             <button><a href = "{% url 'todo-detail' todo.slug %}">Detail</a></button>
                         </div>
-                    </div>
-                </section>
-            {% endfor %}
+                    {% endfor %}
+                </div>
+            </section>
         {% else %}
             <h2 style = "text-align:center;">Hurray!All task has been completed.</h2>
         {% endif %}  

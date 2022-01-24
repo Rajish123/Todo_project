@@ -10,27 +10,29 @@
 
 
         {% if todo_completed %}
-            {% for todo in todo_completed %}
             
                 <section>
                     <div id = "todo-container">
-                        <div class = "todo-detail">
-                            <h2>Title:</h2>
-                            <br><h3>{{todo.title}}</h3><br>
-                            <h2>Description:</h2>
-                            <br><h3>{{todo.description}}</h3><br>
-                            <h2>Created At:</h2>
-                            <br><h3>{{todo.created_at}}</h3><br>
-                            <h2>Updated At:</h2>
-                            <br><h3>{{todo.updated_at}}</h3><br>
-                            <h2>Status:</h2>
-                            <br><h3>{{todo.completed}}</h3><br>
-                            <button><a href = "{% url 'delete-todo' todo.slug %}">Delete</a></button>
-                            <button><a href = "{% url 'todo-detail' todo.slug %}">Detail</a></button>
-                        </div>
+                        {% for todo in todo_completed %}
+
+                            <div class = "todo-detail">
+                                <h2>Title:</h2>
+                                <br><h3>{{todo.title}}</h3><br>
+                                <h2>Description:</h2>
+                                <br><h3>{{todo.description}}</h3><br>
+                                <h2>Created At:</h2>
+                                <br><h3>{{todo.created_at}}</h3><br>
+                                <h2>Updated At:</h2>
+                                <br><h3>{{todo.updated_at}}</h3><br>
+                                <h2>Status:</h2>
+                                <br><h3>{{todo.completed}}</h3><br>
+                                <button><a href = "{% url 'delete-todo' todo.slug %}">Delete</a></button>
+                                <button><a href = "{% url 'todo-detail' todo.slug %}">Detail</a></button>
+                            </div>
+                        {% endfor %}
+
                     </div>
                 </section>
-            {% endfor %}
         {% else %}
             <br><br>
             <h2 style = "color:red; text-align: center;">No task has been accomplished yet!</h2>

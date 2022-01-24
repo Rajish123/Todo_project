@@ -5,6 +5,7 @@ from .forms import *
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .filters import *
+from django.contrib.auth import authenticate,login
 
 # Create your views here.
 
@@ -14,11 +15,17 @@ def SignUp(request):
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
-            form.save()
+            # password = form.cleaned_data.get('password1')
+            user = form.save()
+            login(request, user)
             messages.success(request,f"{username} account successfully created")
+            # new_user = authenticate(username = username, password = password)
+            # if new_user is not None:
+                # login(request,new_user)
             return redirect('home')
+        messages.error(request,"Not a valid form")
     else:
-        form = UserRegistrationForm(request.GET)
+        form = UserRegistrationForm()
     context['form'] = form
     return render(request,'Todo_list/signup.html',context)
 
@@ -33,18 +40,20 @@ def Profile(request):
 def UpdateProfile(request):
     context = {}
     if request.method == "POST":
-        userform = UserUpdateForm(request.POST)
-        profileform = ProfileUpdateForm(request.POST,request.FILES)
+        # interacts with the user model to let users update their username and email
+        userform = UserUpdateForm(request.POST, instance=request.user)
+        # interacts with the profile model to let users update their profile
+        profileform = ProfileUpdateForm(request.POST,request.FILES, instance=request.user.profile)
         if userform and profileform.is_valid():
             userform.save()
             profileform.save()
             messages.success(request,"Updated Successful")
             return redirect('profile')
         else:
-            raise ValidationError("Not valid!")
+            messages.error(request,"Not valid!")
     else:
-        userform = UserUpdateForm()
-        profileform = ProfileUpdateForm(request.POST, request.FILES)
+        userform = UserUpdateForm(instance=request.user)
+        profileform = ProfileUpdateForm(instance = request.user.profile)
     context = {'userform':userform,'profileform':profileform}
     return render(request,'Todo_list/settings.html',context)
 
@@ -54,7 +63,9 @@ def CreateTodo(request):
     context = {}
     
     if request.method == "POST":
-        todoform = TodoForm(request.POST, instance = request.user)
+        todoform = TodoForm(request.POST)
+        todoform.instance.profile = request.user.profile
+
         if todoform.is_valid():
             todoform.save()
             messages.success(request,"Successfully Created.")
@@ -85,7 +96,7 @@ def UpdateTodo(request,slug):
             messages.success(request,"Updated Successfully")
             return redirect('todo-detail', slug = todo.slug)
     else:
-        update_form = TodoForm()
+        update_form = TodoForm(instance = todo)
     context['form'] = update_form
     return render(request,'Todo_list/update_todo.html',context)
 
@@ -146,6 +157,5 @@ def TodoLog(request):
 
 
 
-# create todo error
 
 
